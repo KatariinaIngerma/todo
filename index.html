@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <title>Todo List</title>
+  </head>
+
+  <body class="h-72 bg-gradient-to-r from-purple-600 to-red-500">
+    <div class="max-w-lg my-10 mx-auto">
+      <div class="container bg-white p-8 rounded-lg shadow-lg">
+        <h1 class="text-3xl font-semibold text-center mb-4">Todo List</h1>
+        <div class="flex">
+          <input
+            type="text"
+            id="todoInput"
+            class="todo-input w-full max-w-md px-4 py-2 border rounded-md mb-4"
+            placeholder="Add new task"
+          />
+          <button id="addTaskBtn" class="mb-4 ml-4 text-blue-500 font-bold  transform transition-transform hover:scale-110">ADD</button>
+          
+        </div>
+        <div id="todoList"></div>
+        <div class="flex justify-end"> <!-- Added flex container with justify-between -->
+          <button id="clearTasksBtn" class="ml-4 text-red-500 font-bold mt-5">Clear All</button>
+        </div>
+      </div>
+    </div>
+    <script src="js/main.js"></script>
+  </body>
+</html>
