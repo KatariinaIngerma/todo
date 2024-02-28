@@ -130,8 +130,6 @@ function loadTasks() {
 // Load tasks from localStorage when the page loads
 document.addEventListener("DOMContentLoaded", loadTasks);
 
-// Load tasks from localStorage when the page loads
-document.addEventListener("DOMContentLoaded", loadTasks);
 
 function deleteAllTasks() {
     localStorage.removeItem("tasks");
