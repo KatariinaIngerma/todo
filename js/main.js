@@ -20,6 +20,7 @@ function addTask() {
         const taskParagraph = document.createElement("p");
         taskParagraph.classList.add("task-item", "flex-grow");
         taskParagraph.textContent = taskText;
+        taskParagraph.setAttribute("data-task", taskText);
         taskItem.appendChild(taskParagraph);
 
         // Create a delete button
@@ -30,6 +31,7 @@ function addTask() {
 
         todoList.appendChild(taskItem);
         todoInput.value = "";
+
         updateTaskState(taskText, false); 
 
         // Store task and checkbox state in localStorage
@@ -72,7 +74,7 @@ function updateTaskState(taskText, checked) {
     const index = tasks.findIndex(task => task.text === taskText);
     if (index !== -1) {
         tasks[index].checked = checked;
-        localStorage.setItem("tasks", JSON.stringify(tasks));
+        
 
         const taskItem = todoList.querySelector(`.task-item[data-task="${taskText}"]`);
         console.log(taskItem)
@@ -83,6 +85,7 @@ function updateTaskState(taskText, checked) {
             taskItem.classList.add("text-black")
             taskItem.classList.remove("text-gray-500","line-through" )
         }
+        localStorage.setItem("tasks", JSON.stringify(tasks));
     }
 }
 
