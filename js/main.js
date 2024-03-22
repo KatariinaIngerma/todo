@@ -30,11 +30,13 @@ function addTask() {
 
         todoList.appendChild(taskItem);
         todoInput.value = "";
+        updateTaskState(taskText, false); 
 
         // Store task and checkbox state in localStorage
         const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
         tasks.push({ text: taskText, checked: false }); // Save checkbox state as false initially
         localStorage.setItem("tasks", JSON.stringify(tasks));
+        
     }
 }
 
@@ -55,8 +57,8 @@ function deleteTask(taskItem){
     console.log(tasks)
     // Store the updated tasks back to localStorage
 
-
 }
+
 
 todoList.addEventListener("click", function(event) {
     if (event.target.tagName === "BUTTON" && event.target.classList.contains("delete-btn")) {
@@ -71,6 +73,16 @@ function updateTaskState(taskText, checked) {
     if (index !== -1) {
         tasks[index].checked = checked;
         localStorage.setItem("tasks", JSON.stringify(tasks));
+
+        const taskItem = todoList.querySelector(`.task-item[data-task="${taskText}"]`);
+        console.log(taskItem)
+        if (checked) {
+            taskItem.classList.add("text-gray-500", "line-through");
+            taskItem.classList.remove("black")
+        } else {
+            taskItem.classList.add("text-black")
+            taskItem.classList.remove("text-gray-500","line-through" )
+        }
     }
 }
 
@@ -83,8 +95,7 @@ todoList.addEventListener("change", function(event) {
     }
 });
 
-// Function to load tasks from local storage 
-// Function to load tasks from local storage 
+// Function to load tasks from local storage  
 function loadTasks() {
     const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
     console.log(tasks)
@@ -110,7 +121,15 @@ function loadTasks() {
         const taskParagraph = document.createElement("p");
         taskParagraph.classList.add("task-item", "flex-grow");
         taskParagraph.textContent = task.text;
+        if (task.checked) {
+            taskParagraph.classList.add('text-gray-500', "line-through")
+        } else {
+            taskItem.style.textDecoration = "none";
+            taskItem.classList.add('text-black')
+        }
         taskItem.appendChild(taskParagraph);
+        taskParagraph.setAttribute("data-task", task.text);
+
 
         // Create a delete button
         const deleteButton = document.createElement("button");
